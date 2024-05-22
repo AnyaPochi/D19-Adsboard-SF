@@ -1,0 +1,49 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+  Объявления
+{% endblock title %}
+
+{% block content %}
+  <h1>Объявления:</h1>
+  <p> <a href="{% url 'post_create' %}">Создать новое объявление</a></p>
+
+  <hr>
+  <hr>
+
+  {% if post_list %}
+  {% for post in post_list %}
+    <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>( {{ post.respond_set.all|length }}:Отклика)</h3>
+    <p>Автор: {{ post.author.email }}</p>
+    <hr>
+  {% endfor %}
+  {% else %}
+    <h2>"Нет Объявлений!"</h2>
+  {% endif %}
+
+{% endblock content %}
+
+
+
+   {# Добавляем пагинацию на страницу #}
+
+   {# Информация о предыдущих страницах #}
+   {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
