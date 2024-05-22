@@ -35,10 +35,11 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return f'{self.title()}: {self.author.username}'
+        return f'{self.title} (Автор: {self.author.username})'
 
     def get_absolute_url(self):
         return reverse('post', args=[str(self.id)])
+
 class Respond(models.Model):
     text = models.CharField(max_length=255, unique=False, verbose_name='Текст')
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)

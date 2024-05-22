@@ -19,7 +19,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'description', 'category', 'mediaoforder']
         widgets = {
-            "mediafile": CKEditorUploadingWidget(),
+            "mediaoforder": CKEditorUploadingWidget(),
         }
     # def clean(self):
     #     cleaned_data = super().clean()
@@ -58,34 +58,3 @@ class BasicSignupForm(SignupForm):
                   "email",
                   "password1",
                   "password2", )
-
-
-    # def save(self, request):
-    #     user = super(BasicSignupForm, self).save(request)
-    #     basic_group = Group.objects.get(name='common')
-    #     basic_group.user_set.add(user)
-    #
-    #
-    #     html_content_hello = render_to_string(
-    #         'hello_letter.html',
-    #         {'link': settings.SITE_URL,
-    #         }
-    #     )
-    #     msg = EmailMultiAlternatives(
-    #         subject='Регистрация на портале',
-    #         body='',
-    #         from_email=settings.DEFAULT_FROM_EMAIL,
-    #         to= [user.email]
-    #     )
-    #
-    #     msg.attach_alternative(html_content_hello, 'text/html')
-    #     msg.send()
-    #     return user
-# from django import forms
-# from .models import Image
-#
-#
-# class ImageForm(forms.ModelForm):
-#     class Meta:
-#         model = Image
-#         fields = ('title', 'image')
